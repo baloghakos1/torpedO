@@ -1,0 +1,19 @@
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\bin\Debug\TorpedO.exe.config
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\bin\Debug\TorpedO.exe
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\bin\Debug\TorpedO.pdb
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.AssemblyReference.cache
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.Form1.resources
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.CoreCompileInputs.cache
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.exe
+D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
+J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.exe.config
+J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.exe
+J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.pdb
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.csprojAssemblyReference.cache
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.Form1.resources
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.exe
+J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
