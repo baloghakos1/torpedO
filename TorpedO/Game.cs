@@ -32,7 +32,8 @@ namespace TorpedO
         {
             Ures=0,
             Hajo = 1,
-            Talalt=2
+            Talalt=2,
+            Felfedve=3
 
         }
 
@@ -51,7 +52,8 @@ namespace TorpedO
     {
         static Random rnd = new Random();
         private int sorDb, oszlopDb;
-        public Mezo[,] tabla;
+        public Mezo[,] tablaBot;
+        public Mezo[,] tablaJatekos;
 
         public int SorDb
         {
@@ -65,7 +67,8 @@ namespace TorpedO
         {
             get { return oszlopDb; }
             set { oszlopDb = value;
-                tablaLetrehozasa1();
+                tablaLetrehozasaBot();
+                tablaLetrahozasaJatekos();
             }
         }
         public Jatek(int sorDb, int oszlopDb)
@@ -74,24 +77,37 @@ namespace TorpedO
             OszlopDb = oszlopDb;
         }
 
-        private void tablaLetrehozasa1()
+        private void tablaLetrehozasaBot()
         {
-            tabla = new Mezo[SorDb+2, OszlopDb+2];
-            for (int i = 0; i < tabla.GetLength(0); i++)
+            tablaBot = new Mezo[SorDb+2, OszlopDb+2];
+            for (int i = 0; i < tablaBot.GetLength(0); i++)
             {
-                for (int j = 0; j < tabla.GetLength(1); j++)
+                for (int j = 0; j < tablaBot.GetLength(1); j++)
                 {
-                    tabla[i, j] = new Mezo();
+                    tablaBot[i, j] = new Mezo();
                 }
             }
             
 
-            tablaFeltoltesX(tabla);
+            tablaFeltoltesX(tablaBot);
         }
-        public int db = 0;
+
+        private void tablaLetrahozasaJatekos()
+        {
+            tablaJatekos = new Mezo[SorDb + 2, OszlopDb + 2];
+            for (int i = 0; i < tablaJatekos.GetLength(0); i++)
+            {
+                for (int j = 0; j < tablaJatekos.GetLength(1); j++)
+                {
+                    tablaJatekos[i, j] = new Mezo();
+                }
+            }
+            tablaFeltoltesX(tablaJatekos);
+        }
+
         private void tablaFeltoltesX(Mezo[,] tabla)
         {
-            int[] hajokHossza = new int[] { 1, 1, 1, 1, /*2, 2, 2, 3, 3, 4 */};
+            int[] hajokHossza = new int[] { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
             List<int> hajok = new List<int>();
             for (int i = 0; i < hajokHossza.Length; i++)
             {
@@ -100,46 +116,192 @@ namespace TorpedO
             do
             {
 
-                int sv = rnd.Next(0,hajok.Count()-1);
+                int sv = rnd.Next(0, hajok.Count() - 1);
                 int hajo = hajok[sv];
+                int xPoz, yPoz;
 
-                int xPoz = rnd.Next(1,tabla.GetLength(0)-2);
-                int yPoz = rnd.Next(1,tabla.GetLength(1)-2);
+                int irany = rnd.Next(1, 3);
 
-                switch (hajo) {
+                switch (hajo)
+                {
                     case 1:
-                        if(ellenoriz(xPoz, yPoz, tabla))
+                        xPoz = rnd.Next(1, tabla.GetLength(0) - 1);
+                        yPoz = rnd.Next(1, tabla.GetLength(1) - 1);
+                        if (ellenoriz(xPoz, yPoz, tabla, 0, 1))
                         {
                             tabla[xPoz, yPoz].Jel = Mezo.Jelek.Hajo;
                             hajok.RemoveAt(sv);
-                            db++;
                         }
                         break;
-                    default: break;
+                    case 2:
+                        if (irany == 1)
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 1);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 2);
+                        }
+                        else
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 2);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 1);
+                        }
+                        if (ellenoriz(xPoz, yPoz, tabla, irany, 2))
+                        {
+                            if (irany == 1)
+                            {
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    tabla[xPoz, yPoz + i].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                            if (irany == 2)
+                            {
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    tabla[xPoz + i, yPoz].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                        }
+                        break;
+                    case 3:
+                        if (irany == 1)
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 1);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 3);
+                        }
+                        else
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 3);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 1);
+                        }
+
+                        if (ellenoriz(xPoz, yPoz, tabla, irany, 3))
+                        {
+                            if (irany == 1)
+                            {
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    tabla[xPoz, yPoz + i].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                            if (irany == 2)
+                            {
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    tabla[xPoz + i, yPoz].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                        }
+                        break;
+                    case 4:
+                        if (irany == 1)
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 1);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 4);
+                        }
+                        else
+                        {
+                            xPoz = rnd.Next(1, tabla.GetLength(0) - 4);
+                            yPoz = rnd.Next(1, tabla.GetLength(1) - 1);
+                        }
+
+                        if (ellenoriz(xPoz, yPoz, tabla, irany, 4))
+                        {
+                            if (irany == 1)
+                            {
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    tabla[xPoz, yPoz + i].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                            if (irany == 2)
+                            {
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    tabla[xPoz + i, yPoz].Jel = Mezo.Jelek.Hajo;
+                                }
+                                hajok.RemoveAt(sv);
+                            }
+                        }
+                        break;
                 }
 
-            } while (hajok.Count()!=0);
+            } while (hajok.Count() != 0);
         }
 
-        private bool ellenoriz(int xPoz, int yPoz, Mezo[,] tabla)
+        private bool ellenoriz(int xPoz, int yPoz, Mezo[,] tabla, int irany, int hossz)
         {
-            if (tabla[xPoz, yPoz].Jel == Mezo.Jelek.Ures)
+            if (irany == 0)
             {
-                for (int i = xPoz - 1; i <= xPoz + 1; i++)
+                if (tabla[xPoz, yPoz].Jel == Mezo.Jelek.Ures)
                 {
-                    for (int j = yPoz - 1; j <= yPoz + 1; j++)
+                    bool ok = true;
+                    for (int i = xPoz - 1; i <= xPoz + 1; i++)
                     {
-                        if (tabla[i, j].Jel != Mezo.Jelek.Hajo)
+                        for (int j = yPoz - 1; j <= yPoz + 1; j++)
                         {
-                            return true;
+                            if (tabla[i, j].Jel == Mezo.Jelek.Hajo)
+                            {
+                                ok = false;
+                            }
                         }
                     }
+                    if (ok)
+                    {
+                        return true;
+                    }
                 }
-                
+            }
+            if (irany == 1)
+            {
+                if (tabla[xPoz, yPoz].Jel == Mezo.Jelek.Ures)
+                {
+                    bool ok = true;
+                    for (int i = xPoz - 1; i <= xPoz + 1; i++)
+                    {
+                        for (int j = yPoz - 1; j <= yPoz + hossz; j++)
+                        {
+                            if (tabla[i, j].Jel == Mezo.Jelek.Hajo)
+                            {
+                                ok = false;
+                            }
+                        }
+                    }
+                    if (ok)
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (irany == 2)
+            {
+                if (tabla[xPoz, yPoz].Jel == Mezo.Jelek.Ures)
+                {
+                    bool ok = true;
+                    for (int i = xPoz - 1; i <= xPoz + hossz; i++)
+                    {
+                        for (int j = yPoz - 1; j <= yPoz + 1; j++)
+                        {
+                            if (tabla[i, j].Jel == Mezo.Jelek.Hajo)
+                            {
+                                ok = false;
+                            }
+                        }
+                    }
+                    if (ok)
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
-            
+
         }
+
 
     }
 }

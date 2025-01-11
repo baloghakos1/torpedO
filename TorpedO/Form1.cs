@@ -15,7 +15,17 @@ namespace TorpedO
 
         public Button restart;
 
+        public Button test;
+        public List<Label> jatekos = new List<Label>();
+
+
         private Jatek jatek;
+        public Label[,] jatekosPalya;
+        public Label[,] botPalya;
+
+
+
+        public Random rnd = new Random();
 
         public Form1()
         {
@@ -27,10 +37,18 @@ namespace TorpedO
             restart = new Button();
             restart.Size = new Size(150, 30);
             restart.Text = "Restart";
-            restart.Top = 105;
-            restart.Left = 60;
+            restart.Top = 85;
+            restart.Left = 50;
             restart.Click += Start;
             panelMain.Controls.Add(restart);
+
+            test = new Button();
+            test.Size = new Size(150, 30);
+            test.Text = "test";
+            test.Top = 85;
+            test.Left = 150;
+            test.Click += lovesBot;
+            panelMain.Controls.Add(test);
         }
 
         private void Start(object sender, EventArgs e)
@@ -46,7 +64,10 @@ namespace TorpedO
             int oszlop = 10;
 
             jatek = new Jatek(sor, oszlop);
-            tablaMegjelenites2();
+            jatekosPalya = new Label[sor+2,oszlop+2];
+            botPalya = new Label[sor+2,oszlop+2];
+            tablaMegjelenitesKonnyuBot();
+            tablakMegjelenitesKonnyuJatekos();
             setUp();
         }
 
@@ -56,18 +77,20 @@ namespace TorpedO
             int oszlop = 20;
 
             jatek = new Jatek(sor, oszlop);
-            tablaMegjelenites3();
+            botPalya = new Label[sor + 2, oszlop + 2];
+            jatekosPalya = new Label[sor + 2, oszlop+2];
+            tablaMegjelenitesNehezBot();
+            tablakMegjelenitesNehezJatekos();
             setUp();
         }
 
-        private void tablaMegjelenites2()
+        private void tablakMegjelenitesKonnyuJatekos()
         {
-            int w = 30, h = 30;
-            panelMain.Controls.Clear();
+            int w = 15, h = 15;
 
-            for (int i = 0; i < jatek.SorDb; i++)
+            for (int i = 1; i < jatek.SorDb+1; i++)
             {
-                for (global::System.Int32 j = 0; j < jatek.OszlopDb; j++)
+                for (global::System.Int32 j = 1; j < jatek.OszlopDb+1; j++)
                 {
                     Label lb = new Label()
                     {
@@ -81,61 +104,226 @@ namespace TorpedO
                         Width = w,
                         Height = h,
                         Tag = new Info(i, j),
-                        Left = 470 + j * w - j,
-                        Top = 105 + (i - 1) * h - i,
+                        Left = 60 + (j-1) * w - (j-1),
+                        Top = 280 + (i - 2) * h - (i-1),
                         Parent = panelMain,
                     };
 
-                    if (jatek.tabla[i, j].Jel == Mezo.Jelek.Hajo)
-                    {
-                        lb.Text = "H";
-                    }
-                    else 
-                    {
-                        lb.Text = "U";
-                    }
-                }
-            }
-
-        }
-
-        private void tablaMegjelenites3()
-        {
-            int w = 20, h = 20;
-            panelMain.Controls.Clear();
-
-            for (int i = 0; i < jatek.SorDb; i++)
-            {
-                for (global::System.Int32 j = 0; j < jatek.OszlopDb; j++)
-                {
-                    Label lb = new Label()
-                    {
-                        Text = "",
-                        AutoSize = false,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Font = new Font("Courier New", 12, FontStyle.Bold),
-                        BorderStyle = BorderStyle.FixedSingle,
-                        BackColor = Color.LightGray,
-                        Cursor = Cursors.Hand,
-                        Width = w,
-                        Height = h,
-                        Tag = new Info(i, j),
-                        Left = 370 + j * w - j,
-                        Top = 55 + (i - 1) * h - i,
-                        Parent = panelMain,
-                    };
-
-                    if (jatek.tabla[i, j].Jel == Mezo.Jelek.Hajo)
+                    if (jatek.tablaJatekos[i, j].Jel == Mezo.Jelek.Hajo)
                     {
                         lb.Text = "H";
                     }
                     else
                     {
-                        lb.Text = "U";
+                        lb.Text = "";
                     }
+
+                    //jatekos.Add(lb);
+                    jatekosPalya[i, j] = lb;
+                }
+            }
+
+            //jatekosPalya[1, 1].Text = "asd";
+
+
+
+        }
+
+        private void tablakMegjelenitesNehezJatekos()
+        {
+            int w = 15, h = 15;
+
+            for (int i = 1; i < jatek.SorDb+1; i++)
+            {
+                for (global::System.Int32 j = 1; j < jatek.OszlopDb+1; j++)
+                {
+                    Label lb = new Label()
+                    {
+                        Text = "",
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Font = new Font("Courier New", 12, FontStyle.Bold),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        BackColor = Color.LightGray,
+                        Cursor = Cursors.Hand,
+                        Width = w,
+                        Height = h,
+                        Tag = new Info(i, j),
+                        Left = 30 + (j-1) * w - (j-1),
+                        Top = 150 + (i - 2) * h - (i-1),
+                        Parent = panelMain,
+                    };
+
+                    if (jatek.tablaJatekos[i, j].Jel == Mezo.Jelek.Hajo)
+                    {
+                        lb.Text = "H";
+                    }
+                    else
+                    {
+                        lb.Text = "";
+                    }
+
+                    //jatekos.Add(lb);
+                    jatekosPalya[i, j] = lb;
+                }
+            }
+
+
+        }
+
+        private void tablaMegjelenitesKonnyuBot()
+        {
+            int w = 30, h = 30;
+            panelMain.Controls.Clear();
+
+            for (int i = 1; i < jatek.SorDb+1; i++)
+            {
+                for (global::System.Int32 j = 1; j < jatek.OszlopDb+1; j++)
+                {
+                    Label lb = new Label()
+                    {
+                        Text = "",
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Font = new Font("Courier New", 12, FontStyle.Bold),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        BackColor = Color.LightGray,
+                        Cursor = Cursors.Hand,
+                        Width = w,
+                        Height = h,
+                        Tag = new Info(i, j),
+                        Left = 470 + (j-1) * w - (j-1),
+                        Top = 105 + (i - 2) * h - (i-1),         
+                        Parent = panelMain,
+                    };
+
+                    lb.MouseEnter += Label_MouseEnter;
+                    lb.MouseLeave += Label_MouseLeave;
+
+
+                    if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
+                    {
+                        lb.Text = "H";
+                    }
+                    else 
+                    {
+                        lb.Text = "";
+                    }
+
+                    botPalya[i,j] = lb;
+                }
+            }
+
+            //botPalya[1, 1].Text = "asd";
+
+            
+
+
+        }
+
+        private void tablaMegjelenitesNehezBot()
+        {
+            int w = 20, h = 20;
+            panelMain.Controls.Clear();
+
+            for (int i = 1; i < jatek.SorDb+1; i++)
+            {
+                for (global::System.Int32 j = 1; j < jatek.OszlopDb+1; j++)
+                {
+                    Label lb = new Label()
+                    {
+                        Text = "",
+                        AutoSize = false,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Font = new Font("Courier New", 12, FontStyle.Bold),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        BackColor = Color.LightGray,
+                        Cursor = Cursors.Hand,
+                        Width = w,
+                        Height = h,
+                        Tag = new Info(i, j),
+                        Left = 370 + (j-1) * w - (j-1),
+                        Top = 55 + (i -2) * h - (i-1),
+                        Parent = panelMain,
+                    };
+
+                    lb.MouseEnter += Label_MouseEnter;
+                    lb.MouseLeave += Label_MouseLeave;
+
+                    if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
+                    {
+                        lb.Text = "H";
+                    }
+                    else
+                    {
+                        lb.Text = "";
+                    }
+
+                    botPalya[i, j] = lb;
                 }
             }
 
         }
+
+        private void Label_MouseEnter(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            if (label != null)
+            {
+                label.BackColor = Color.LightPink; 
+            }
+        }
+
+        private void Label_MouseLeave(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            if (label != null)
+            {
+                label.BackColor = Color.LightGray; 
+            }
+        }
+
+
+        private void lovesBot(object sender, EventArgs e)
+        {
+
+            var delay = Task.Delay(500);
+            delay.Wait();
+
+            int x = rnd.Next(1, jatek.tablaJatekos.GetLength(0) - 1);
+            int y = rnd.Next(1, jatek.tablaJatekos.GetLength(1) - 1);
+
+            do
+            {
+                x = rnd.Next(1, jatek.tablaJatekos.GetLength(0) - 1);
+                y = rnd.Next(1, jatek.tablaJatekos.GetLength(1) - 1);
+
+            } while (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Felfedve);
+
+            if (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Hajo)
+            {
+                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Talalt;
+            }
+            else
+            {
+                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Ures;
+            }
+
+            if (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Talalt)
+            {
+                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Felfedve;
+                jatekosPalya[x, y].Text = "X";
+            }
+            else
+            {
+                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Felfedve;
+                jatekosPalya[x, y].Text = "*";
+            }
+        }
+
+
+
+
+
     }
 }

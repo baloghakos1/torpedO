@@ -8,12 +8,22 @@ D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.Genera
 D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.CoreCompileInputs.cache
 D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.exe
 D:\Hártó Vince\RAJMOND\TorpedO\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
-J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.exe.config
-J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.exe
-J:\12.I\WiCS\TorpedO\TorpedO\bin\Debug\TorpedO.pdb
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.csprojAssemblyReference.cache
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.Form1.resources
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.exe
-J:\12.I\WiCS\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csprojAssemblyReference.cache
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.Form1.resources
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.exe
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.exe.config
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.exe
+D:\Szabó Barnabás 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.pdb
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.exe.config
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.exe
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\bin\Debug\TorpedO.pdb
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.AssemblyReference.cache
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.Form1.resources
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.CoreCompileInputs.cache
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.exe
+D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
