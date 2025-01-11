@@ -118,12 +118,10 @@ namespace TorpedO
                         lb.Text = "";
                     }
 
-                    //jatekos.Add(lb);
                     jatekosPalya[i, j] = lb;
                 }
             }
 
-            //jatekosPalya[1, 1].Text = "asd";
 
 
 
@@ -163,7 +161,6 @@ namespace TorpedO
                         lb.Text = "";
                     }
 
-                    //jatekos.Add(lb);
                     jatekosPalya[i, j] = lb;
                 }
             }
@@ -197,24 +194,27 @@ namespace TorpedO
                         Parent = panelMain,
                     };
 
-                    lb.MouseEnter += Label_MouseEnter;
-                    lb.MouseLeave += Label_MouseLeave;
+                    
 
 
                     if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
                     {
                         lb.Text = "H";
+                        lb.MouseClick += felfed;
                     }
                     else 
                     {
                         lb.Text = "";
+                        lb.MouseClick += felfed1;
                     }
+
+                    lb.MouseEnter += Label_MouseEnter;
+                    lb.MouseLeave += Label_MouseLeave;
 
                     botPalya[i,j] = lb;
                 }
             }
 
-            //botPalya[1, 1].Text = "asd";
 
             
 
@@ -281,6 +281,24 @@ namespace TorpedO
             {
                 label.BackColor = Color.LightGray; 
             }
+        }
+
+        private void felfed(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            label.BackColor = Color.Red;
+            label.MouseEnter -= Label_MouseEnter;
+            label.MouseLeave -= Label_MouseLeave;
+            label.MouseClick -= felfed;
+        }
+
+        private void felfed1(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            label.BackColor = Color.Blue;
+            label.MouseEnter -= Label_MouseEnter;
+            label.MouseLeave -= Label_MouseLeave;
+            label.MouseClick -= felfed1;
         }
 
 

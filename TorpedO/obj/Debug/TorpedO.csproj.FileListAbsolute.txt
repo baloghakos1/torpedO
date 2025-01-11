@@ -27,3 +27,13 @@ D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.Generate
 D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.csproj.CoreCompileInputs.cache
 D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.exe
 D:\Németh Rajmond Ádám 12.i\TorpedO\TorpedO\obj\Debug\TorpedO.pdb
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\bin\Debug\TorpedO.exe.config
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\bin\Debug\TorpedO.exe
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\bin\Debug\TorpedO.pdb
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.csproj.AssemblyReference.cache
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.Form1.resources
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.Properties.Resources.resources
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.csproj.GenerateResource.cache
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.csproj.CoreCompileInputs.cache
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.exe
+C:\Users\MAG\OneDrive\Dokumentumok\Boronkay\12.i\torpedO-main\TorpedO\obj\Debug\TorpedO.pdb
