@@ -210,7 +210,7 @@ namespace TorpedO
 
                     if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
                     {
-                        lb.Text = Convert.ToString(jatek.tablaBot[i, j].abc);
+                        //lb.Text = Convert.ToString(jatek.tablaBot[i, j].abc);
                         lb.MouseClick += felfedHajo;
                     }
                     else 
@@ -257,7 +257,7 @@ namespace TorpedO
 
                     if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
                     {
-                        lb.Text = "H";
+                        //lb.Text = "H";
                         lb.MouseClick += felfedHajo;
                     }
                     else
