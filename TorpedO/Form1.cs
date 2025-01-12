@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 namespace TorpedO
 {
+
     public partial class Form1 : Form
     {
 
         public Button restart;
 
-        public Button test;
+        //public Button test;
         public List<Label> jatekos = new List<Label>();
 
 
@@ -24,9 +25,9 @@ namespace TorpedO
         public Label[,] botPalya;
 
 
-
         public Random rnd = new Random();
 
+        public int hajoDb;
         public Form1()
         {
             InitializeComponent();
@@ -42,16 +43,23 @@ namespace TorpedO
             restart.Click += Start;
             panelMain.Controls.Add(restart);
 
-            test = new Button();
+            /*test = new Button();
             test.Size = new Size(150, 30);
             test.Text = "test";
             test.Top = 85;
             test.Left = 150;
             test.Click += lovesBot;
-            panelMain.Controls.Add(test);
+            panelMain.Controls.Add(test);*/
         }
 
         private void Start(object sender, EventArgs e)
+        {
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(Easy);
+            panelMain.Controls.Add(Hard);
+        }
+
+        private void Start()
         {
             panelMain.Controls.Clear();
             panelMain.Controls.Add(Easy);
@@ -117,6 +125,7 @@ namespace TorpedO
                     {
                         lb.Text = "";
                     }
+
 
                     jatekosPalya[i, j] = lb;
                 }
@@ -194,30 +203,25 @@ namespace TorpedO
                         Parent = panelMain,
                     };
 
-                    
+                    lb.MouseEnter += Label_MouseEnter;
+                    lb.MouseLeave += Label_MouseLeave;
+                    //lb.MouseClick += lovesJatekos;
 
 
                     if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
                     {
-                        lb.Text = "H";
-                        lb.MouseClick += felfed;
+                        lb.Text = Convert.ToString(jatek.tablaBot[i, j].abc);
+                        lb.MouseClick += felfedHajo;
                     }
                     else 
                     {
                         lb.Text = "";
-                        lb.MouseClick += felfed1;
+                        lb.MouseClick += felfedUres;
                     }
-
-                    lb.MouseEnter += Label_MouseEnter;
-                    lb.MouseLeave += Label_MouseLeave;
 
                     botPalya[i,j] = lb;
                 }
             }
-
-
-            
-
 
         }
 
@@ -249,14 +253,17 @@ namespace TorpedO
 
                     lb.MouseEnter += Label_MouseEnter;
                     lb.MouseLeave += Label_MouseLeave;
+                   // lb.MouseClick += lovesJatekos;
 
                     if (jatek.tablaBot[i, j].Jel == Mezo.Jelek.Hajo)
                     {
                         lb.Text = "H";
+                        lb.MouseClick += felfedHajo;
                     }
                     else
                     {
                         lb.Text = "";
+                        lb.MouseClick += felfedUres;
                     }
 
                     botPalya[i, j] = lb;
@@ -283,29 +290,104 @@ namespace TorpedO
             }
         }
 
-        private void felfed(object sender, EventArgs e)
+        private void lovesJatekos(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            if (jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].Jel == Mezo.Jelek.Hajo)
+            {
+                label.BackColor = Color.Red;
+                label.Text = "X";
+
+
+                if (jatek.sullyedt((label.Tag as Info).Sor, (label.Tag as Info).Oszlop, jatek.tablaBot))
+                {
+                    MessageBox.Show("süllyedt");
+                    //jatek.sullyedEll((label.Tag as Info).Sor, (label.Tag as Info).Oszlop, jatek.tablaBot);
+                    
+                }
+
+                jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].Jel = Mezo.Jelek.FelfedettHajo;
+            }
+            else 
+            {
+                label.BackColor = Color.Blue;
+                label.Text = "*";
+                jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].Jel = Mezo.Jelek.Ures;
+
+            }
+
+            label.MouseEnter -= Label_MouseEnter;
+            label.MouseLeave -= Label_MouseLeave;
+            label.MouseClick -= lovesJatekos;
+
+            lovesBot();
+        }
+
+        private void felfedHajo(object sender, EventArgs e)
         {
             Label label = sender as Label;
             label.BackColor = Color.Red;
+            label.Text = "X";
+            jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].Jel = Mezo.Jelek.FelfedettHajo;
             label.MouseEnter -= Label_MouseEnter;
             label.MouseLeave -= Label_MouseLeave;
-            label.MouseClick -= felfed;
+            label.MouseClick -= felfedHajo;
+
+            if (jatek.sullyedt((label.Tag as Info).Sor, (label.Tag as Info).Oszlop, jatek.tablaBot))
+            {
+                MessageBox.Show("süllyedt");
+                for (int i = jatek.sullyedEll(jatek.tablaBot, jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].abc)[0]; i <= jatek.sullyedEll(jatek.tablaBot, jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].abc)[2]; i++)
+                {
+                    for (int j = jatek.sullyedEll(jatek.tablaBot, jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].abc)[1]; j <= jatek.sullyedEll(jatek.tablaBot, jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].abc)[3]; j++)
+                    {
+                        if (i >= 0 && i < jatek.tablaBot.GetLength(0) && j >= 0 && j < jatek.tablaBot.GetLength(1))
+                        {
+                            if (jatek.tablaBot[i,j].abc != jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].abc)
+                            {
+                                Label adjacentLabel = botPalya[i, j];
+                                if (adjacentLabel != null)
+                                {
+                                    felfedsullyed(adjacentLabel);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (jatek.win(jatek.tablaBot))
+                {
+                    MessageBox.Show("Gratulálok nyertél!");
+                    Start();
+                }
+            }
         }
 
-        private void felfed1(object sender, EventArgs e)
+        private void felfedsullyed(Label label)
+        {
+            label.BackColor = Color.Blue;
+            label.Text = "*";
+            label.MouseEnter -= Label_MouseEnter;
+            label.MouseLeave -= Label_MouseLeave;
+            label.MouseClick -= felfedUres;
+        }
+
+        private void felfedUres(object sender, EventArgs e)
         {
             Label label = sender as Label;
             label.BackColor = Color.Blue;
+            label.Text = "*";
+            jatek.tablaBot[(label.Tag as Info).Sor, (label.Tag as Info).Oszlop].Jel = Mezo.Jelek.Ures;
             label.MouseEnter -= Label_MouseEnter;
             label.MouseLeave -= Label_MouseLeave;
-            label.MouseClick -= felfed1;
+            label.MouseClick -= felfedUres;
+
+            lovesBot();
         }
 
 
-        private void lovesBot(object sender, EventArgs e)
+        private void lovesBot(/*object sender, EventArgs e*/)
         {
-
-            var delay = Task.Delay(500);
+            panelMain.Enabled = false;
+            var delay = Task.Delay(5);
             delay.Wait();
 
             int x = rnd.Next(1, jatek.tablaJatekos.GetLength(0) - 1);
@@ -316,7 +398,7 @@ namespace TorpedO
                 x = rnd.Next(1, jatek.tablaJatekos.GetLength(0) - 1);
                 y = rnd.Next(1, jatek.tablaJatekos.GetLength(1) - 1);
 
-            } while (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Felfedve);
+            } while (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Felfedve || jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.FelfedettHajo);
 
             if (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Hajo)
             {
@@ -329,19 +411,45 @@ namespace TorpedO
 
             if (jatek.tablaJatekos[x, y].Jel == Mezo.Jelek.Talalt)
             {
-                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Felfedve;
+                jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.FelfedettHajo;
                 jatekosPalya[x, y].Text = "X";
+                jatekosPalya[x, y].BackColor = Color.Red;
+                if (jatek.sullyedt(x,y,jatek.tablaJatekos))
+                {
+                    MessageBox.Show($"süllyedt Játekosé {x},{y}");
+                    for (int i = jatek.sullyedEll(jatek.tablaJatekos, jatek.tablaJatekos[x,y].abc)[0]; i <= jatek.sullyedEll(jatek.tablaJatekos, jatek.tablaJatekos[x, y].abc)[2]; i++)
+                    {
+                        for (int j = jatek.sullyedEll(jatek.tablaJatekos, jatek.tablaJatekos[x, y].abc)[1]; j <= jatek.sullyedEll(jatek.tablaJatekos, jatek.tablaJatekos[x, y].abc)[3]; j++)
+                        {
+                            if (i >= 0 && i < jatek.tablaJatekos.GetLength(0) && j >= 0 && j < jatek.tablaJatekos.GetLength(1))
+                            {
+                                if (jatek.tablaJatekos[i, j].abc != jatek.tablaJatekos[x,y].abc)
+                                {
+                                    Label adjacentLabel = jatekosPalya[i, j];
+                                    if (adjacentLabel != null)
+                                    {
+                                        jatek.tablaJatekos[i, j].Jel = Mezo.Jelek.Felfedve;
+                                        felfedsullyed(adjacentLabel);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (jatek.lose(jatek.tablaJatekos))
+                    {
+                        MessageBox.Show("Sajnálom veszettél.");
+                        Start();
+                    }
+                }
+                lovesBot();
             }
             else
             {
                 jatek.tablaJatekos[x, y].Jel = Mezo.Jelek.Felfedve;
                 jatekosPalya[x, y].Text = "*";
+                jatekosPalya[x, y].BackColor = Color.Blue;
             }
+            panelMain.Enabled = true;
         }
-
-
-
-
-
     }
 }
