@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panelMain = new System.Windows.Forms.Panel();
-            this.Easy = new System.Windows.Forms.Button();
             this.Hard = new System.Windows.Forms.Button();
+            this.Easy = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,16 +44,6 @@
             this.panelMain.Size = new System.Drawing.Size(800, 450);
             this.panelMain.TabIndex = 1;
             // 
-            // Easy
-            // 
-            this.Easy.Location = new System.Drawing.Point(182, 174);
-            this.Easy.Name = "Easy";
-            this.Easy.Size = new System.Drawing.Size(189, 94);
-            this.Easy.TabIndex = 0;
-            this.Easy.Text = "Könnyű";
-            this.Easy.UseVisualStyleBackColor = true;
-            this.Easy.Click += new System.EventHandler(this.Easy_Click);
-            // 
             // Hard
             // 
             this.Hard.Location = new System.Drawing.Point(424, 174);
@@ -64,6 +54,16 @@
             this.Hard.UseVisualStyleBackColor = true;
             this.Hard.Click += new System.EventHandler(this.Hard_Click);
             // 
+            // Easy
+            // 
+            this.Easy.Location = new System.Drawing.Point(182, 174);
+            this.Easy.Name = "Easy";
+            this.Easy.Size = new System.Drawing.Size(189, 94);
+            this.Easy.TabIndex = 0;
+            this.Easy.Text = "Könnyű";
+            this.Easy.UseVisualStyleBackColor = true;
+            this.Easy.Click += new System.EventHandler(this.Easy_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -71,7 +71,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelMain);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Torpedó";
             this.panelMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
